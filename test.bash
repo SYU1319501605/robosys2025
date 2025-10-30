@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2025 Kaki Syu
+# SPDX-License-Identifier: BSD-3-Clause
 
 
 ng(){
@@ -7,8 +9,8 @@ ng(){
 }
 res=0
 
-a=朱
-[ "$a" = 種 ] || ng "$LINENO"
-[ "$a" = 朱 ] || ng "$LINENO"
+out=$(seq 5 | ./plus)
+[ "${out}" = 15.0 ] || ng "$LINENO"
 
+[ "${res}" = 0 ] && echo OK
 exit $res
