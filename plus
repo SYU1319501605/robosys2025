@@ -1,12 +1,43 @@
-#!/usr/bin/python3
+#!/bin/bash
 # SPDX-FileCopyrightText: 2025 Kaki Syu
 # SPDX-License-Identifier: BSD-3-Clause
 
-import sys
+alphabets=0
+digits=0
+others=0
 
-ans = 0.0
-for line in sys.stdin:
-    ans += float(line)
+input=$(cat)
 
 
-print(ans)
+# 空入力または改行だけならエラー
+if [[ -z "${input}" ]]; then
+    echo "chrcount: no input provided" >&2
+    exit 1
+fi
+
+# 有効な文字チェックを緩和（改行以外の文字があればOK）
+if [[ ! "$input" =~ [^[:space:]] ]]; then
+    echo "chrcount: no valid input" >&2
+    exit 1
+fi
+
+while IFS= read -r -n1 char;do
+    if [ -z "$char" ]; then
+        continue
+    fi
+
+    if [[ "$char" =~ [A-Za-z] ]];then
+	alphabets=$((alphabets + 1))
+    elif [[ "$char" =~ [0-9] ]];then
+        digits=$((digits + 1))
+    else
+        others=$((others + 1))
+    fi
+done <<< "$input"
+
+total=$((alphabets + digits + others))
+
+echo "total     $total"
+echo "alphabets $alphabets"
+echo "digits    $digits"
+echo "others    $others"

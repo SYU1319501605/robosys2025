@@ -10,7 +10,7 @@ ng(){
 res=0
 
 ### NORMAL INPUT ###
-out=$(echo 'abc123XYZ!?@' | ./chrcount)
+out=$(echo 'abc123XYZ!?@' | ./plus)
 [ "$(echo "$out" | grep -i total | awk '{print $2}')" = 12 ] || ng "$LINENO"
 [ "$(echo "$out" | grep -i alphabets | awk '{print $2}')" = 6 ] || ng "$LINENO"
 [ "$(echo "$out" | grep -i digits | awk '{print $2}')" = 3 ] || ng "$LINENO"
@@ -18,11 +18,11 @@ out=$(echo 'abc123XYZ!?@' | ./chrcount)
 
 
 ### STRANGE INPUT ###
-out=$(echo | ./chrcount)
+out=$(echo | ./plus)
 [ "$?" = 1 ]      || ng "$LINENO"
 [ "${out}" = "" ] || ng "$LINENO"
 
-out=$(echo あいう | ./chrcount)
+out=$(echo あいう | ./plus)
 [ "$?" = 0 ] || ng "$LINENO"  # エラーにならない
 [ "$(echo "$out" | grep -i total | awk '{print $2}')" = 3 ] || ng "$LINENO"
 [ "$(echo "$out" | grep -i alphabets | awk '{print $2}')" = 0 ] || ng "$LINENO"
