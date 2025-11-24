@@ -26,7 +26,7 @@
 入力例：
 $ echo Hello123! | ./plus
 
-出力例：
+出力例：<br>
 total     9<br>
 alphabets 5<br>
 digits    3<br>
